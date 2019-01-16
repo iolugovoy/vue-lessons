@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Проект на Вью</title>
+
+	<script src="https://unpkg.com/popper.js"></script>
+	<script src="https://unpkg.com/vue"></script>
+	<script src="https://unpkg.com/v-tooltip"></script>
+	<script src="https://unpkg.com/v-copy"></script>
+</head>
+<body>
+	<div id="app">
+		
+		<table>
+			<thead> 
+			  <tr >
+				<td colspan="4">
+				  Всего пользователей {{ usersCount }} 
+				</td>
+			  </tr>
+			</thead>
+			<tbody v-show="showTable">
+			  <tr v-for="user in users">
+				<td>
+				  {{ user.firstName | upperCase }}
+				  
+				</td>
+				<td>
+				  {{ user.lastName | upperCase }}
+				   <button v-copy="user.lastName">Копировать</button>
+				</td>
+				<td>
+				  {{ user.patronymic | upperCase }}
+				</td>
+				<td> 
+				  <img v-if="user.img" v-bind:src="user.img" v-bind:alt="user.firstName">
+				  <img v-else src="https://via.placeholder.com/50/000000/ffffff" alt="Нет фото">
+				</td>
+			  </tr>
+			</tbody>
+		</table>
+		<button type="button" v-on:click="toggleTable" v-tooltip="tooltip">
+		{{ buttonText }}
+		</button>
+
+	</div>
+	<script src="vue.js"></script>
+</body>
+</html>
+
+
+
+                <div>
+                 [[!recaptchav2_render]]
+                  [[!+fi.error.recaptchav2_error]]
+                  <span class="error_g-recaptcha-response error"></span>
+              </div>
