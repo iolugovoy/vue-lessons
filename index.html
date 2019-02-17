@@ -3,56 +3,58 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Проект на Вью</title>
-
 	<script src="https://unpkg.com/popper.js"></script>
 	<script src="https://unpkg.com/vue"></script>
 	<script src="https://unpkg.com/v-tooltip"></script>
 	<script src="https://unpkg.com/v-copy"></script>
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
 	<div id="app">
-		
-		<table>
-			<thead> 
-			  <tr >
-				<td colspan="4">
-				  Всего пользователей {{ usersCount }} 
-				</td>
-			  </tr>
-			</thead>
-			<tbody v-show="showTable">
-			  <tr v-for="user in users">
-				<td>
-				  {{ user.firstName | upperCase }}
-				  
-				</td>
-				<td>
-				  {{ user.lastName | upperCase }}
-				   <button v-copy="user.lastName">Копировать</button>
-				</td>
-				<td>
-				  {{ user.patronymic | upperCase }}
-				</td>
-				<td> 
-				  <img v-if="user.img" v-bind:src="user.img" v-bind:alt="user.firstName">
-				  <img v-else src="https://via.placeholder.com/50/000000/ffffff" alt="Нет фото">
-				</td>
-			  </tr>
-			</tbody>
-		</table>
-		<button type="button" v-on:click="toggleTable" v-tooltip="tooltip">
-		{{ buttonText }}
-		</button>
+		<div v-if="showTable" class="">
+			<users-table v-bind:users="users" title="USERS TABLE COMPONETNT!!" v-on:remove="removeUser"></users-table>
+		</div>
 
+		
+		<button type="button" v-on:click="change" v-tooltip="tooltip">
+			{{ buttonText }}
+		</button>
+	</div>
+	<div id="table" class="d-none">
+		<div class="user-table">
+			{{ title }}
+			<div v-for="(user, index) in users" v-bind:key="index" class="user-item">
+				<div>
+					<button v-copy="fullName(user)">Копировать</button>
+				</div>
+				<div>
+					{{ user.firstName }}
+					
+				</div>
+				<div>
+					{{ user.lastName }}
+					 
+				</div>
+				<div>
+					{{ user.patronymic }}
+				</div>
+				<div> 
+					<img v-if="user.img" v-bind:src="user.img" v-bind:alt="user.firstName">
+					<img v-else src="https://via.placeholder.com/50/000000/ffffff" alt="Нет фото">
+				</div> 
+				<div>
+					<button type="button" v-on:click="removeItem(user)">
+						X
+					</button>
+				</div>
+				
+			</div>
+		</div>
 	</div>
 	<script src="vue.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
-
-                <div>
-                 [[!recaptchav2_render]]
-                  [[!+fi.error.recaptchav2_error]]
-                  <span class="error_g-recaptcha-response error"></span>
-              </div>
